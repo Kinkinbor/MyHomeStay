@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>溢香阁后台管理系统</title>
+    <link th:href="@{/static/favicon.ico}" rel="icon">
+    <link th:href="@{/static/css/loginCss.css}" rel="stylesheet">
+</head>
+<body>
+<div id="box" class="login">
+    <div class="night">
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+    </div>
+    <div class="login-box" ref="boxA" id="login_form">
+        <h2>管理员登录</h2>
+        <form class="form-box">
+            <div class="user-box" prop="username">
+                <input type="text" required="" id="username" name="username" class="login_info">
+                <label>账号</label>
+            </div>
+            <div class="user-box" prop="password">
+                <input type="password" required="" id="password" name="password" class="login_info">
+                <label>密码</label>
+            </div>
+            <div style="width: 100%; text-align: center">
+                <div class="loginBtn" style="cursor:pointer">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    登录
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/jquery.base64.js}"></script>
+
+<script>
+    if (window.top !== window.self) {
+        window.top.location = window.location;
+    }
+    $(document).ready(function () {
+        //禁止浏览器回退到上一个页面
+        if (window.history && window.history.pushState) {
+            $(window).on('popstate', function () {
+                window.history.pushState('forward', null, '#');
+                window.history.forward(1);
+            });
+        }
+        // 适配IE浏览器
+        window.history.pushState('forward', null, '#');
+        window.history.forward(1);
+    });
+
+    //按回车键 触发登录
+    $('.login_info').keydown(function (e) {
+        if (e.keyCode === 13) {
+            login();
+        }
+    });
+    //登录
+    $(".loginBtn").on("click", function () {
+        login();
+    });
+
+    function shaking() {
+        const cls = document.getElementById("login_form").classList;
+        cls.remove("shake_effect");
+        setTimeout(() => {
+            cls.add("shake_effect");
+        }, 1);
+    }
+
+    function login() {
+        var username= $('#username').val();
+        var password = $('#password').val();
+        if (username.length === 0 || username.length === 0 || username.trim().length === 0 || username.trim().length === 0) {
+            return false;
+        }
+        // var data = {"account": $.base64.encode(username)
+        //     , "password": $.base64.encode(password)
+        // };
+        var data = {"username": username
+            , "password": password
+        };
+        $.ajax({
+            type: "post",
+            url: "login",
+            contentType: "application/json;charset=UTF-8",
+            data: JSON.stringify(data),
+            success: function (result) {
+                if (result.code === 0) {
+                    location.href = './index';
+                }else{
+                    shaking();
+                    console.log(result)
+                }
+            },
+            error: function (result) {
+                console.log(result);
+                shaking();
+            }
+        });
+
+    }
+</script>
+</html>

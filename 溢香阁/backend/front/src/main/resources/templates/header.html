@@ -1,0 +1,91 @@
+
+<header class="site-header header-transparent mo-left">
+<div class="sticky-header main-bar-wraper navbar-expand-lg">
+        <div class="main-bar clearfix ">
+            <div class="container clearfix"><!-- website logo -->
+                <div class="logo-header mostion">
+                    <a href="" class="logo-1">
+                        <img th:src="@{static/picture/logo-white-1.png}" alt="">
+                    </a>
+                    <a href="" class="logo-2">
+                        <img th:src="@{static/picture/logo-black-1.png}" alt="">
+                    </a>
+                </div><!-- nav toggle button -->
+                <button class="navbar-toggler collapsed navicon justify-content-end" type="button"
+                        data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                        aria-expanded="false" aria-label="Toggle navigation"><span></span><span></span><span></span>
+                </button><!-- extra nav -->
+                <div class="extra-nav" sec:authorize="!isAuthenticated()">
+                    <div class="extra-cell">
+                        <a th:href="@{/login}" class="site-button-link white">
+                            <i class="ti-import m-r5 rotate90"></i>登录
+                        </a>
+                    </div>
+                </div>
+                <div class="extra-nav" sec:authorize="isAuthenticated()" style="padding:6px 0">
+                    <a th:href="@{/login}" class="site-button-link white">
+                        <img th:src="@{'static/avatar/' + ${#authentication.getPrincipal().userEntity.Avatar}}" style="opacity: unset; width: 40px;height:40px;border-radius:50%; overflow:hidden;"/>
+                    </a>
+                </div>
+                <div class="extra-nav" sec:authorize="isAuthenticated()">
+                    <div class="extra-cell">
+                        <a class="site-button-link white">
+                            欢迎您!
+                        </a>
+                    </div>
+                </div>
+
+                <!-- main nav -->
+                <div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">主页 </a></li>
+                        <li class="down"><a href="#">Listings <i class="fa fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="add-listing.html">Add Listing<span class="tag-new">New</span></a></li>
+                                <li><a href="#">Listings <i class="fa fa-angle-right"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="listing.html">Listing</a></li>
+                                        <li><a href="listing-left-sidebar.html">Listing Left Sidebar</a></li>
+                                        <li><a href="listing-right-sidebar.html">Listing Right Sidebar</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Listing Grid <i class="fa fa-angle-right"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="listing-grid-left-sidebar.html">Left Sidebar</a></li>
+                                        <li><a href="listing-grid-right-sidebar.html">Right Sidebar</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Listing Map <i class="fa fa-angle-right"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="listing-grid-map-left-sidebar.html">Left Sidebar</a></li>
+                                        <li><a href="listing-grid-map-right-sidebar.html">Right Sidebar</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Listing Details <i class="fa fa-angle-right"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="listing-details.html">Listing Details 1</a></li>
+                                        <li><a href="HomeDetails.html">Listing Details 2<span class="tag-new">New</span></a>
+                                        </li>
+                                        <li><a href="listing-details-3.html">Listing Details 3<span class="tag-new">New</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="down"><a href="#">房东博客 <i class="fa fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="blog-standard.html">Blog</a></li>
+                                <li><a href="blog-details.html">Blog Details</a></li>
+                            </ul>
+                        </li>
+                        <li class="down"><a href="#">发现页 <i class="fa fa-chevron-down"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="contact-us.html">联系我们</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-L-admin1.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="shortcut icon" th:href="@{/static/favicon.ico}" type="image/x-icon"/>
+    <link th:href="@{/static/css/font.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/static/css/xadmin.css}">
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/static/js/xadmin.js}"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="x-body">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label for="L_account" class="layui-form-label">
+                <span class="x-red">*</span>账号
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_account" readonly
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_username" class="layui-form-label">
+                <span class="x-red">*</span>昵称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_username" name="username" required lay-verify="nikename"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_gender" class="layui-form-label">
+                <span class="x-red">*</span>性别
+            </label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" id="L_gender" value="男" title="男" checked="">
+                <div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i>
+                    <div>男</div>
+                </div>
+                <input type="radio" name="sex" value="女" title="女">
+                <div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i>
+                    <div>女</div>
+                </div>
+            </div>
+        </div>    <!-- 性别 -->
+        <div class="layui-form-item">
+            <label for="L_balance" class="layui-form-label">
+                <span class="x-red">*</span>余额
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_balance" name="balance" required lay-verify="balance"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_username" class="layui-form-label">
+            </label>
+            <button class="layui-btn" lay-filter="update" lay-submit="">
+                修改
+            </button>
+        </div>
+    </form>
+</div>
+<script>
+    layui.use(['form', 'layer'], function () {
+        $ = layui.jquery;
+        var form = layui.form;
+        var layer = layui.layer;
+        // $.ajax({
+        //     url:
+        // })
+        //自定义验证规则
+        form.verify({
+            nikename: function (value) {
+                if (value.length < 3) {
+                    return '昵称至少得3个字符';
+                }
+            }
+            , balance: [/(^[1-9]([0-9]+)?(.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9].[0-9]([0-9])?$)/, '必须仅包含数字和小数点，且小数少于三位']
+        });
+
+        //监听提交
+        form.on('submit(update)', function (data) {
+            console.log(data);
+            //发异步，把数据提交给php
+            layer.alert("增加成功", {icon: 6}, function () {
+                // 获得frame索引
+                var index = parent.layer.getFrameIndex(window.name);
+                //关闭当前frame
+                parent.layer.close(index);
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+
+</html>

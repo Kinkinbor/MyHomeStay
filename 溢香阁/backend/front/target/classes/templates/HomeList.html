@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="">
+    <meta name="description" content="BizMap Directory & Listings HTML templates">
+    <meta name="format-detection" content="telephone=no"><!-- FAVICONS ICON -->
+    <title>BizMap Directory & Listings HTML templates</title><!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/plugins.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/templete.css}">
+    <link class="skin" rel="stylesheet" type="text/css" th:href="@{static/css/skin-1.css}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{static/picture/favicon.png}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/star-rating-svg.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/jquery-te-1.4.0.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/imageuploadify.min.css}">
+    <link rel="stylesheet" th:href="@{static/css/jquery.tag-editor.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/calendar.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/layer.css}">
+
+</head>
+<body id="bg">
+<template id="tem">
+    <div class="col-lg-4 col-md-6 col-sm-6 m-b30">
+        <div class="listing-bx overlap featured-bx style2" style="cursor: pointer">
+            <div class="listing-media featured-media">
+                <img class="imggg" alt="">
+            </div>
+            <div class="listing-info">
+                <ul class="featured-star">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                </ul>
+                <h3 class="title">
+                    <a class="homeN" href="listing-details.html">King Organic Shop</a>
+                </h3>
+            </div>
+            <ul class="wish-bx">
+                <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i></a>
+                </li>
+                <li><a class="info-btn" href="javascript:void(0)"><i class="fa fa-leaf"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</template>
+<div id="loading-area"></div>
+<span id="userId" hidden sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().userEntity.id}"></span>
+<div class="page-wraper"><!-- header -->
+    <div class="headerPage">
+    </div>
+    <div class="page-content bg-white"><!-- inner page banner -->
+        <div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-black-middle"
+             style="background-image:url(static/picture/bnr3.jpg);display: flex;justify-content: center;align-items: center;">
+            <div class="container">
+                <div class="dlab-tabs search-filter">
+                    <div class="tab-content">
+                        <div class="tab-pane active">
+                            <form type="submit">
+                                <div class="input-group">
+                                    <div class="form-control">
+                                        <select id="city" name="city">
+                                            <option value="北京市">北京市</option>
+                                            <option value="保定市">保定市</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-control">
+                                        <select id="district" name="district">
+                                            <option value="徐水区">徐水区</option>
+                                            <option value="朝阳区">朝阳市</option>
+                                        </select>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="搜索房源名称" id="text" name="text">
+                                    <div class="input-group-prepend" onclick="return getHouseList()">
+                                        <button class="site-button text-uppercase" type="button">
+                                            <i class="fa m-r5 fa-search"></i>Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- inner page banner END --><!-- Contact area -->
+        <div class="content-block">
+            <div class="section-full content-inner bg-white">
+                <div class="container">
+                    <div class="listing-filter m-b40">
+                        <div class="d-flex">
+                            <div class="mr-auto">
+                                <ul class="filter m-b0">
+                                    <li>
+                                        <select>
+                                            <option>Default Filters</option>
+                                            <option>Construction</option>
+                                            <option>Corodinator</option>
+                                            <option>Employer</option>
+                                            <option>Financial Career</option>
+                                            <option>Information Technology</option>
+                                            <option>Marketing</option>
+                                            <option>Quality check</option>
+                                            <option>Real Estate</option>
+                                            <option>Sales</option>
+                                            <option>Supporting</option>
+                                            <option>Teaching</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select>
+                                            <option>Distance Radius</option>
+                                            <option>Construction</option>
+                                            <option>Corodinator</option>
+                                            <option>Employer</option>
+                                            <option>Financial Career</option>
+                                            <option>Information Technology</option>
+                                            <option>Marketing</option>
+                                            <option>Quality check</option>
+                                            <option>Real Estate</option>
+                                            <option>Sales</option>
+                                            <option>Supporting</option>
+                                            <option>Teaching</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select>
+                                            <option>More Filters</option>
+                                            <option>Construction</option>
+                                            <option>Corodinator</option>
+                                            <option>Employer</option>
+                                            <option>Financial Career</option>
+                                            <option>Information Technology</option>
+                                            <option>Marketing</option>
+                                            <option>Quality check</option>
+                                            <option>Real Estate</option>
+                                            <option>Sales</option>
+                                            <option>Supporting</option>
+                                            <option>Teaching</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="filter-icon m-b0">
+                                    <li><a href="javascript:void(0)"><i class="fa fa-th"></i></a></li>
+                                    <li><a href="javascript:void(0)"><i class="fa fa-th-list"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="dataList">
+                    </div>
+                    <!-- Pagination start -->
+                    <div class="pagination-bx clearfix text-center">
+
+                        <ul class="pagination">
+                            <li class="previous"><a href="javascript:void(0)"><i class="fa fa-arrow-left"></i></a></li>
+                            <li><a href="javascript:void(0)">1</a></li>
+                            <li><a href="javascript:void(0)">2</a></li>
+                            <li><a href="javascript:void(0)">...</a></li>
+                            <li class="active"><a href="javascript:void(0)">7</a></li>
+                            <li class="next"><a href="javascript:void(0)"><i class="fa fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Contact area END --></div><!-- Content END--><!-- Footer -->
+
+    <!-- Footer -->
+    <div class="footerPage">
+
+    </div>
+    <!-- Footer END-->
+    <button class="scroltop fa fa-chevron-up"></button>
+</div><!-- JAVASCRIPT FILES ========================================= -->
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+    var clone;
+    $(function () {
+        $(".headerPage").load("header");
+        $(".footerPage").load("footer");
+    });
+    var x = JSON.parse("[[${data}]]".replace(/&quot;/g, '"'));
+    console.log(x)
+    var param = sessionStorage.getItem('city');
+    var district = sessionStorage.getItem('district');
+    var text = sessionStorage.getItem('text');
+    if (param) {
+        $("#city").val(param);
+        $("#district").val(district);
+        if (text)
+            $("#text").val(text);
+        if (x != null && x !== "" && x.data.length != "0") {
+            for (let item of x.data) {
+                var xxx = generateLayuiCode(item,"first")
+                $("#dataList").append(xxx);
+            }
+        }
+    }
+    var c = sessionStorage.getItem('c');
+    var d = sessionStorage.getItem('d');
+    var t = sessionStorage.getItem('t');
+    if (!param && (c || d || d)) {
+        $("#city").val(c);
+        $("#district").val(d);
+        $("#text").val(t);
+        $.post(
+            "/getHouseListToJson",
+            {
+                "city": c,
+                "district": d,
+                "text": t
+            },
+            function (res) {
+                var parentDiv = document.getElementById("dataList");
+                while (parentDiv.firstChild) {
+                    parentDiv.removeChild(parentDiv.firstChild);
+                }
+                for (let item of res.data.data.data) {
+                    var xxx = generateLayuiCode(item,"flush")
+                    $("#dataList").append(xxx);
+                }
+            });
+    }
+
+    function getHouseList() {
+        sessionStorage.removeItem('city');
+        sessionStorage.removeItem('district');
+        sessionStorage.removeItem('text');
+        var cc = $("#city").val();
+        var dd = $("#district").val();
+        var tt = $("#text").val();
+        $.post(
+            "/getHouseListToJson",
+            {
+                "city": cc,
+                "district": dd,
+                "text": tt
+            },
+            function (resss) {
+                while (document.getElementById("dataList").hasChildNodes()) //当div下还存在子节点时 循环继续
+                {
+                    document.getElementById("dataList").childNodes.forEach(node => node.remove())
+                }
+                sessionStorage.removeItem('c');
+                sessionStorage.removeItem('d');
+                sessionStorage.removeItem('t');
+                sessionStorage.setItem("c", cc);
+                sessionStorage.setItem("d", dd);
+                sessionStorage.setItem("t", tt);
+                console.log(resss)
+                for (let item of resss.data.data.data) {
+                    var xxx = generateLayuiCode(item,"AllSearch")
+                    $("#dataList").append(xxx);
+                }
+            });
+    }
+
+    function generateLayuiCode(template,flag) {
+        var UserID = $("#userId").text();
+        const layuiCode = `
+    <div class="col-lg-4 col-md-6 col-sm-6 m-b30" id="${template.houseEntity.id}">
+        <div class="listing-bx overlap featured-bx style2" style="cursor: pointer">
+            <div class="listing-media featured-media">
+                <img class="imggg" alt="" src="${template.houseEntity.images}">
+            </div>
+            <div class="listing-info">
+                <ul class="featured-star">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                </ul>
+                <h3 class="title">
+                    <a class="homeN" href="listing-details.html">${template.houseEntity.title}</a>
+                </h3>
+            </div>
+            <ul class="wish-bx">
+                <li><a class="like-btn ${template.isFavorite}" href="javascript:void(0);" onclick='return loaded(this, "` + flag + `","` + `${template.houseEntity.id}` + `","` + UserID+ `")'><i class="fa fa-heart"></i></a>
+                </li>
+                <li><a class="info-btn" href="javascript:void(0);"><i class="fa fa-leaf"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+  `;
+        return layuiCode;
+    }
+    function loaded(as,flag,HouseID,Status) {
+        if (flag == "AllSearch"){
+            //发ajax数据
+            $.post(
+                "/Favorite/House",
+                {
+                    "HouseID": HouseID,
+                    "UserID": $("#userId").text(),
+                    "Status": document.getElementById(HouseID).querySelector(".like-btn").classList.contains("active") ? "1" : "0"
+                },
+                function (data) {
+                    if (data.code == "0"){
+                        if (data.data == "1" || data.data == "2"){
+                            if (as.classList.contains('active')){
+                                as.classList.remove("active");
+                            }else{
+                                as.classList.add("active");
+                            }
+                            layer.msg(data.data == "1" ? "更新成功" : "该房源收藏状态被其他客户端操作", {
+                                icon: data.data == "1" ? 1 : 0,
+                                time: 2500 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                        }
+                        else if (data.data == "-1"){
+                            console.log("这里有一个-1的")
+                            layer.msg("房源状态错误，请刷新重试", {
+                                icon: 2,
+                                time: 2500 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                        }
+                        else{
+                            layer.msg("操作失败", {
+                                icon: 2,
+                                time: 2500 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                        }
+                    }
+                    else{
+                        layer.msg("服务器维护中，给您致以歉意", {
+                            icon: 2,
+                            time: 2500 //2秒关闭（如果不配置，默认是3秒）
+                        });
+                    }
+                });
+
+        }
+        else if(flag == "first"){
+            if (as.classList.contains('active')){
+                as.classList.remove("active");
+            }else{
+                as.classList.add("active");
+            }
+            $.post(
+                "/Favorite/House",
+                {
+                    "HouseID": HouseID,
+                    "UserID": $("#userId").text(),
+                    "Status": document.getElementById(HouseID).querySelector(".like-btn").classList.contains("active") ? "0" : "1"
+                },
+                function (data) {
+                    console.log(data)
+                    if (data.code == "0"){
+                        if (data.data == "1" || data.data == "2"){
+                            if (as.classList.contains('active')){
+                                as.classList.remove("active");
+                            }else{
+                                as.classList.add("active");
+                            }
+                            layer.msg(data.data == "1" ? "更新成功" : "该房源收藏状态被其他客户端操作", {
+                                icon: data.data == "1" ? 1 : 0,
+                                time: 2500 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                        }
+                        else if (data.data == "-1"){
+                            console.log("这里有一个-1的")
+                            layer.msg("房源状态错误，请刷新重试", {
+                                icon: 2,
+                                time: 2500 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                        }
+                        else{
+                            layer.msg("操作失败", {
+                                icon: 2,
+                                time: 2500 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                        }
+                    }
+                    else{
+                        layer.msg("服务器维护中，给您致以歉意", {
+                            icon: 2,
+                            time: 2500 //2秒关闭（如果不配置，默认是3秒）
+                        });
+                    }
+                });
+
+        }
+        else{
+            if (as.classList.contains('active')){
+                as.classList.remove("active");
+            }else{
+                as.classList.add("active");
+            }
+            $.post(
+                "/Favorite/House",
+                {
+                    "HouseID": HouseID,
+                    "UserID": $("#userId").text(),
+                    "Status": document.getElementById(HouseID).querySelector(".like-btn").classList.contains("active") ? "0" : "1"
+                },
+                function (data) {
+                    console.log(data)
+                    if (data.code == "0"){
+                        if (data.data == "1" || data.data == "2"){
+                            if (as.classList.contains('active')){
+                                as.classList.remove("active");
+                            }else{
+                                as.classList.add("active");
+                            }
+                            layer.msg(data.data == "1" ? "更新成功" : "该房源收藏状态被其他客户端操作", {
+                                icon: data.data == "1" ? 1 : 0,
+                                time: 2500 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                        }
+                        else if (data.data == "-1"){
+                            console.log("这里有一个-1的")
+                            layer.msg("房源状态错误，请刷新重试", {
+                                icon: 2,
+                                time: 2500 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                        }
+                        else{
+                            layer.msg("操作失败", {
+                                icon: 2,
+                                time: 2500 //2秒关闭（如果不配置，默认是3秒）
+                            });
+                        }
+                    }
+                    else{
+                        layer.msg("服务器维护中，给您致以歉意", {
+                            icon: 2,
+                            time: 2500 //2秒关闭（如果不配置，默认是3秒）
+                        });
+                    }
+                });
+        }
+
+    }
+</script>
+
+<script th:src="@{static/js/popper.min.js}"></script><!-- BOOTSTRAP.MIN JS -->
+<script th:src="@{static/js/bootstrap.min.js}"></script><!-- BOOTSTRAP.MIN JS -->
+<script th:src="@{static/js/bootstrap-select.min.js}"></script><!-- FORM JS -->
+<script th:src="@{static/js/jquery.bootstrap-touchspin.js}"></script><!-- FORM JS -->
+<script th:src="@{static/js/magnific-popup.js}"></script><!-- MAGNIFIC POPUP JS -->
+<script th:src="@{static/js/waypoints-min.js}"></script><!-- WAYPOINTS JS -->
+<script th:src="@{static/js/counterup.min.js}"></script><!-- COUNTERUP JS -->
+<script th:src="@{static/js/imagesloaded.js}"></script><!-- IMAGESLOADED -->
+<script th:src="@{static/js/masonry-3.1.4.js}"></script><!-- MASONRY -->
+<script th:src="@{static/js/masonry.filter.js}"></script><!-- MASONRY -->
+<script th:src="@{static/js/rangeslider.js}"></script><!-- RANGESLIDER -->
+<script th:src="@{static/js/owl.carousel.js}"></script><!-- OWL SLIDER -->
+<script th:src="@{static/js/custom.js}"></script><!-- CUSTOM FUCTIONS -->
+<script th:src="@{static/js/dz.carousel.js}"></script><!-- SORTCODE FUCTIONS -->
+<script th:src="@{static/js/dz.ajax.js}"></script><!-- CONTACT JS -->
+<!-- Tencent MAP -->
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77"></script>
+<script th:src="@{static/js/jquery.star-rating-svg.js}"></script><!-- STAR RATING SVG -->
+<script th:src='@{static/js/moment.min.js}'></script><!-- SORTCODE FUCTIONS  -->
+<script th:src='@{static/js/calendar.js}'></script><!-- SORTCODE FUCTIONS  -->
+<script th:src="@{static/js/particles.js}"></script>
+<script th:src="@{static/js/particles.app.js}"></script>
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<script th:src="@{static/js/html5shiv.min.js}"></script>
+<script th:src="@{static/js/layer.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="">
+    <meta name="description" content="BizMap Directory & Listings HTML templates">
+    <meta name="format-detection" content="telephone=no"><!-- FAVICONS ICON -->
+    <title>BizMap Directory & Listings HTML templates</title><!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/plugins.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/templete.css}">
+    <link class="skin" rel="stylesheet" type="text/css" th:href="@{static/css/skin-1.css}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{static/picture/favicon.png}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/star-rating-svg.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/jquery-te-1.4.0.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/imageuploadify.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/jquery.tag-editor.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/calendar.css}">
+</head>
+<body id="bg">
+<div id="loading-area"></div>
+<div class="page-wraper">
+    <!-- Header -->
+    <div class="headerPage"></div>
+    <!-- Header END-->
+    <div class="page-content bg-white"><!-- Section Banner -->
+        <div class="dlab-bnr-inr dlab-bnr-inr-md" style="background-image:url(static/picture/slide1.jpg); background-size: cover;">
+            <div class="container">
+                <div class="dlab-bnr-inr-entry align-m dlab-home">
+                    <div class="bnr-content"><h2><strong>寻找</strong>梦想的地方</h2></div>
+                    <div class="dlab-tabs search-filter">
+                        <ul class="nav nav-tabs">
+                            <li hidden></li>
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#place"><i
+                                    class="fa fa-map-marker"></i><span class="title-head">Place</span></a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#party"><i
+                                    class="fa fa-music"></i><span class="title-head">Party</span></a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#restauren"><i
+                                    class="fa fa-glass"></i><span class="title-head">Restauren</span></a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <form type="submit" action="/houseList" method="post">
+                                    <div class="input-group">
+                                        <div class="form-control">
+                                            <select id="city" name="city">
+                                                <option value="北京市">北京市</option>
+                                                <option value="保定市">保定市</option>
+                                            </select>
+                                        </div >
+                                        <div class="form-control">
+                                            <select id="district" name="district">
+                                                <option value="徐水区">徐水区</option>
+                                                <option value="朝阳区">朝阳市</option>
+                                            </select>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="搜索房源名称" id="text" name="text" >
+                                        <div class="input-group-prepend" onclick="return search()">
+                                            <button class="site-button text-uppercase" type="submit">
+                                                <i class="fa m-r5 fa-search"></i>Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <p class="text-center text-white m-b10 m-t30">Find awesome places,bars,restaurants & activities.</p>
+                    </div>
+
+                    <div class="category-bx">
+
+                        <a href="listing-left-sidebar.html" class="category">
+                            <i class="flaticon-cart-of-ecommerce"></i><p>carts</p>
+                        </a>
+                        <a href="listing-left-sidebar.html" class="category">
+                            <i class="flaticon-carrot"></i><p>foods</p>
+                        </a>
+                        <a href="listing-left-sidebar.html" class="category">
+                            <i class="flaticon-hockey"></i><p>candy</p>
+                        </a>
+                        <a href="listing-left-sidebar.html" class="category">
+                        <i class="flaticon-pill-capsule"></i><p>medicine</p>
+                        </a>
+                        <a href="listing-left-sidebar.html" class="category">
+                            <i class="flaticon-birthday-cake"></i><p>cake</p>
+                        </a>
+                        <a href="listing-left-sidebar.html" class="category">
+                            <i class="flaticon-place"></i><p>place</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Section Banner END --><!-- Search Filter -->
+        <div class="section-full">
+            <div class="container"></div>
+        </div><!-- Search Filter END -->
+        <div class="content-block"><!-- Featured Destinations -->
+            <div class="section-full bg-white content-inner">
+                <div class="container">
+                    <div class="section-head text-black text-center"><h2 class="box-title">流行的城市</h2>
+                        <div class="dlab-separator bg-primary"></div>
+                        <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud.</p></div>
+                    <div class="row">   <!--四大都市-->
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="featured-bx m-b30 featured-bx style2" style="cursor: pointer" onclick="window.location.href='homeList?city=50&district=&text=';return false">
+                                <div class="featured-media featured-media"><img th:src="@{static/picture/pic22.jpg}" alt=""></div>
+                                <div class="featured-info">
+                                    <ul class="featured-star">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                    <h5 class="title"><a href="listing-details.html">雾都重庆</a></h5>
+                                    <ul class="featured-category">
+                                        <li><i class="fa fa-moon-o"></i>12 Cities</li>
+                                        <li><i class="fa fa-map-o"></i>30+Listing</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="featured-bx m-b30 featured-bx style2" style="cursor: pointer" onclick="window.location.href='homeList?city=31&district=&text=';return false">
+                                <div class="featured-media featured-media">
+                                    <img th:src="@{static/picture/pic33.jpg}" alt="">
+                                </div>
+                                <div class="featured-info">
+                                    <ul class="featured-star">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                    <h5 class="title"><a href="listing-details.html">魔都上海</a></h5>
+                                    <ul class="featured-category">
+                                        <li><i class="fa fa-moon-o"></i>12 Cities</li>
+                                        <li><i class="fa fa-map-o"></i>30+Listing</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="featured-bx m-b30 featured-bx style2" style="cursor: pointer" onclick="window.location.href='homeList?city=4401&district=&text=';return false">
+                                <div class="featured-media featured-media"><img th:src="@{static/picture/pic42.jpg}" alt=""></div>
+                                <div class="featured-info">
+                                    <ul class="featured-star">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                    <h5 class="title"><a href="listing-details.html">妖都广州</a></h5>
+                                    <ul class="featured-category">
+                                        <li><i class="fa fa-moon-o"></i>12 Cities</li>
+                                        <li><i class="fa fa-map-o"></i>30+Listing</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="featured-bx m-b30 featured-bx style2" style="cursor: pointer" onclick="window.location.href='homeList?city=6101&district=&text=';return false">
+                                <div class="featured-media featured-media"><img th:src="@{static/picture/pic52.jpg}" alt=""></div>
+                                <div class="featured-info">
+                                    <ul class="featured-star">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                    <h5 class="title"><a href="listing-details.html">古都西安</a></h5>
+                                    <ul class="featured-category">
+                                        <li><i class="fa fa-moon-o"></i>12 Cities</li>
+                                        <li><i class="fa fa-map-o"></i>30+Listing</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Featured Destinations End --><!-- Our Services -->
+            <div class="section-full bg-gray content-inner about-us">
+                <div class="container-fluid">
+                    <div class="section-head text-black text-center"><h2 class="box-title">火爆景点</h2>
+                        <div class="dlab-separator bg-primary"></div>
+                        <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud.</p></div>
+                    <div class="most-visite owl-carousel owl-btn-center-lr owl-btn-1 primary">
+                        <div class="item">
+                            <div class="listing-bx featured-star-left m-b30">
+                                <div class="listing-media"><img th:src="@{static/picture/pic1.jpg}" alt="">
+                                    <ul class="featured-star">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="listing-info"><h3 class="title"><a href="listing-details.html">King Organic
+                                    Shop</a></h3>
+                                    <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusm.</p>
+                                    <ul class="place-info">
+                                        <li class="place-location"><i class="fa fa-map-marker"></i>12/a,New</li>
+                                        <li class="open"><i class="fa fa-check"></i>Open Now</li>
+                                    </ul>
+                                </div>
+                                <ul class="wish-bx">
+                                    <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i></a>
+                                    </li>
+                                    <li><a class="info-btn" href="javascript:void(0)"><i class="fa fa-leaf"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="listing-bx featured-star-left m-b30">
+                                <div class="listing-media"><img th:src="@{static/picture/pic1.jpg}" alt="">
+                                    <ul class="featured-star">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="listing-info"><h3 class="title"><a href="listing-details.html">Dorado Health
+                                    Care</a></h3>
+                                    <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusm.</p>
+                                    <ul class="place-info">
+                                        <li class="place-location"><i class="fa fa-map-marker"></i>12/a,New</li>
+                                        <li class="open"><i class="fa fa-check"></i>Open Now</li>
+                                    </ul>
+                                </div>
+                                <ul class="wish-bx">
+                                    <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i></a>
+                                    </li>
+                                    <li><a class="info-btn" href="javascript:void(0)"><i class="fa fa-leaf"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="listing-bx featured-star-left m-b30">
+                                <div class="listing-media"><img th:src="@{static/picture/pic1.jpg}" alt="">
+                                    <ul class="featured-star">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="listing-info"><h3 class="title"><a href="listing-details.html">Tam Farfhume
+                                    Shop</a></h3>
+                                    <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusm.</p>
+                                    <ul class="place-info">
+                                        <li class="place-location"><i class="fa fa-map-marker"></i>12/a,New</li>
+                                        <li class="open"><i class="fa fa-check"></i>Open Now</li>
+                                    </ul>
+                                </div>
+                                <ul class="wish-bx">
+                                    <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i></a>
+                                    </li>
+                                    <li><a class="info-btn" href="javascript:void(0)"><i class="fa fa-leaf"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="listing-bx featured-star-left m-b30">
+                                <div class="listing-media"><img th:src="@{static/picture/pic1.jpg}" alt="">
+                                    <ul class="featured-star">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="listing-info"><h3 class="title"><a href="listing-details.html">King Organic
+                                    Shop</a></h3>
+                                    <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusm.</p>
+                                    <ul class="place-info">
+                                        <li class="place-location"><i class="fa fa-map-marker"></i>12/a,New</li>
+                                        <li class="open"><i class="fa fa-check"></i>Open Now</li>
+                                    </ul>
+                                </div>
+                                <ul class="wish-bx">
+                                    <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i></a>
+                                    </li>
+                                    <li><a class="info-btn" href="javascript:void(0)"><i class="fa fa-leaf"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="listing-bx featured-star-left m-b30">
+                                <div class="listing-media"><img th:src="@{static/picture/pic1.jpg}" alt="">
+                                    <ul class="featured-star">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="listing-info"><h3 class="title"><a href="listing-details.html">Venzil Hingo
+                                    Zoo</a></h3>
+                                    <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusm.</p>
+                                    <ul class="place-info">
+                                        <li class="place-location"><i class="fa fa-map-marker"></i>12/a,New</li>
+                                        <li class="open"><i class="fa fa-check"></i>Open Now</li>
+                                    </ul>
+                                </div>
+                                <ul class="wish-bx">
+                                    <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i></a>
+                                    </li>
+                                    <li><a class="info-btn" href="javascript:void(0)"><i class="fa fa-leaf"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="listing-bx featured-star-left m-b30">
+                                <div class="listing-media"><img th:src="@{static/picture/pic1.jpg}" alt="">
+                                    <ul class="featured-star">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="listing-info"><h3 class="title"><a href="listing-details.html">KFC Pijja
+                                    Shop</a></h3>
+                                    <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusm.</p>
+                                    <ul class="place-info">
+                                        <li class="place-location"><i class="fa fa-map-marker"></i>12/a,New</li>
+                                        <li class="open"><i class="fa fa-check"></i>Open Now</li>
+                                    </ul>
+                                </div>
+                                <ul class="wish-bx">
+                                    <li><a class="like-btn" href="javascript:void(0)"><i class="fa fa-heart"></i></a>
+                                    </li>
+                                    <li><a class="info-btn" href="javascript:void(0)"><i class="fa fa-leaf"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Our Services --><!-- Why Choose Us -->
+            <div class="section-full bg-img-fix most-visited content-inner overlay-primary-dark"
+                 style="background-image:url(static/picture/bg1.jpg);">
+                <div class="container">
+                    <div class="section-head text-white text-center"><h2 class="box-title">How It Works?</h2>
+                        <div class="dlab-separator bg-white"></div>
+                        <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud.</p></div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="icon-bx-wraper sr-box center box1 m-b30">
+                                <div class="icon-bx-lg radius bg-white m-b20"><a href="javascript:void(0)"
+                                                                                 class="icon-cell text-primary"><i
+                                        class="ti-search"></i></a></div>
+                                <div class="icon-content"><h3 class="dlab-tilte">选择你要做的</h3>
+                                    <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusmod tempor
+                                        incididunt ut labore.</p></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="icon-bx-wraper sr-box center  m-b30">
+                                <div class="icon-bx-lg radius bg-white m-b20"><a href="javascript:void(0)"
+                                                                                 class="icon-cell text-primary"><i
+                                        class="ti-gift"></i></a></div>
+                                <div class="icon-content"><h3 class="dlab-tilte">寻找你想要的</h3>
+                                    <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusmod tempor
+                                        incididunt ut labore.</p></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="icon-bx-wraper sr-box center box1 m-b30">
+                                <div class="icon-bx-lg radius bg-white m-b20"><a href="javascript:void(0)"
+                                                                                 class="icon-cell text-primary"><i
+                                        class="ti-rocket"></i></a></div>
+                                <div class="icon-content"><h3 class="dlab-tilte">探索神奇的地方</h3>
+                                    <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusmod tempor
+                                        incididunt ut labore.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Why Chose Us End --><!-- Our Portfolio -->
+            <div class="section-full content-inner bg-gray">
+                <div class="container">
+                    <div class="section-head text-center"><h2 class="box-title">用户畅言</h2>
+                        <div class="dlab-separator bg-primary"></div>
+                        <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud.</p></div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div id="owl-demo"
+                                     class="testimonial-one owl-loaded owl-theme owl-carousel owl-btn-center-lr owl-btn-3 owl-dots-primary-big">
+                                    <div class="item">
+                                        <div class="client-box">
+                                            <div class="client-detail">
+                                                <div class="client-img"><img th:src="@{static/picture/pic16.jpg}"
+                                                                             width="100" height="100" alt=""></div>
+                                                <div class="client-info"><h5 class="client-name">Diamond Anderson</h5>
+                                                    <span>Founder,uihub inc.</span></div>
+                                            </div>
+                                            <div class="client-info-bx"><h5>Ut enim ad minim veniam,quis nostrud
+                                                exercitation ullamco laboris nisi ut aliquip. </h5>
+                                                <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad minim veniam,quis nostrud exercitation ullamco laboris.</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="client-box">
+                                            <div class="client-detail">
+                                                <div class="client-img"><img th:src="@{static/picture/pic16.jpg}"
+                                                                             width="100" height="100" alt=""></div>
+                                                <div class="client-info"><h5 class="client-name">Diamond Anderson</h5>
+                                                    <span>Founder,uihub inc.</span></div>
+                                            </div>
+                                            <div class="client-info-bx"><h5>Ut enim ad minim veniam,quis nostrud
+                                                exercitation ullamco laboris nisi ut aliquip. </h5>
+                                                <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad minim veniam,quis nostrud exercitation ullamco laboris.</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="client-box">
+                                            <div class="client-detail">
+                                                <div class="client-img"><img th:src="@{static/picture/pic3.jpg}"
+                                                                             width="100" height="100" alt=""></div>
+                                                <div class="client-info"><h5 class="client-name">Diamond Anderson</h5>
+                                                    <span>Founder,uihub inc.</span></div>
+                                            </div>
+                                            <div class="client-info-bx"><h5>Ut enim ad minim veniam,quis nostrud
+                                                exercitation ullamco laboris nisi ut aliquip. </h5>
+                                                <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad minim veniam,quis nostrud exercitation ullamco laboris.</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Our Portfolio END --><!-- Featured Destinations -->
+            <div class="section-full bg-white content-inner">
+                <div class="container">
+                    <div class="section-head text-black text-center"><h2 class="box-title">来自房东博客</h2>
+                        <div class="dlab-separator bg-primary"></div>
+                        <p>Lorem ipsum dolor sit amet,consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud.</p></div>
+                    <div class="blog-carousel owl-carousel owl-none blog-shadow-out">
+                        <div class="item">
+                            <div class="blog-post dez-blog">
+                                <div class="dlab-post-media"><a href="blog-details.html"><img
+                                        th:src="@{static/picture/pic19.jpg}" alt=""></a></div>
+                                <div class="dlab-info">
+                                    <div class="category-tag"><a href="blog-details.html">Tarvel</a></div>
+                                    <div class="dlab-post-title "><h5 class="post-title"><a href="blog-details.html">7
+                                        Moments To Remember From Directory.</a></h5></div>
+                                    <div class="dlab-post-text"><p>Achieving only 1 out of the
+                                        4(traffic,opt-in,conversion,email) doesn’t do much help either.</p></div>
+                                    <div class="dlab-post-meta">
+                                        <ul>
+                                            <li class="post-author"><i class="icon-user"></i>By <a
+                                                    href="blog-details.html">John Doe</a></li>
+                                            <li class="post-comment"><i class="icon-speech"></i><a
+                                                    href="blog-details.html">12 Comments</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="blog-post dez-blog">
+                                <div class="dlab-post-media"><a href="blog-details.html"><img
+                                        th:src="@{static/picture/pic34.jpg}" alt=""></a></div>
+                                <div class="dlab-info">
+                                    <div class="category-tag"><a href="blog-details.html">Foods</a></div>
+                                    <div class="dlab-post-title "><h5 class="post-title"><a href="blog-details.html">Directory
+                                        Will Be A Thing Of The Past.</a></h5></div>
+                                    <div class="dlab-post-text"><p>Knowing that,you’ve optimised your pages countless
+                                        amount of times,written tons of eye catching.</p></div>
+                                    <div class="dlab-post-meta">
+                                        <ul>
+                                            <li class="post-author"><i class="icon-user"></i>By <a
+                                                    href="blog-details.html">Rosalina</a></li>
+                                            <li class="post-comment"><i class="icon-speech"></i><a
+                                                    href="blog-details.html">08 Comments</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="blog-post dez-blog">
+                                <div class="dlab-post-media"><a href="blog-details.html"><img
+                                        th:src="@{static/picture/pic23.jpg}" alt=""></a></div>
+                                <div class="dlab-info">
+                                    <div class="category-tag"><a href="blog-details.html">Hotel</a></div>
+                                    <div class="dlab-post-title "><h5 class="post-title"><a href="blog-details.html">Ten
+                                        Things Your Competitors Know About.</a></h5></div>
+                                    <div class="dlab-post-text"><p>As desperate as you are right now,you have done
+                                        everything you can on your website to say.</p></div>
+                                    <div class="dlab-post-meta">
+                                        <ul>
+                                            <li class="post-author"><i class="icon-user"></i>By <a
+                                                    href="blog-details.html">John Smith</a></li>
+                                            <li class="post-comment"><i class="icon-speech"></i><a
+                                                    href="blog-details.html">03 Comments</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Featured Destinations End --></div><!-- contact area END --></div>
+    <!-- Content END-->
+    <!-- Footer -->
+    <div class="footerPage">
+    </div>
+    <!-- Footer END-->
+    <button class="scroltop fa fa-chevron-up"></button>
+</div><!-- JAVASCRIPT FILES ========================================= -->
+
+<script th:src="@{static/js/jquery.min.js}"></script><!-- BOOTSTRAP.MIN JS -->
+<script th:src="@{static/js/popper.min.js}"></script><!-- BOOTSTRAP.MIN JS -->
+<script th:src="@{static/js/bootstrap.min.js}"></script><!-- BOOTSTRAP.MIN JS -->
+<script th:src="@{static/js/bootstrap-select.min.js}"></script><!-- FORM JS -->
+<script th:src="@{static/js/jquery.bootstrap-touchspin.js}"></script><!-- FORM JS -->
+<script th:src="@{static/js/magnific-popup.js}"></script><!-- MAGNIFIC POPUP JS -->
+<script th:src="@{static/js/waypoints-min.js}"></script><!-- WAYPOINTS JS -->
+<script th:src="@{static/js/counterup.min.js}"></script><!-- COUNTERUP JS -->
+<script th:src="@{static/js/imagesloaded.js}"></script><!-- IMAGESLOADED -->
+<script th:src="@{static/js/masonry-3.1.4.js}"></script><!-- MASONRY -->
+<script th:src="@{static/js/masonry.filter.js}"></script><!-- MASONRY -->
+<script th:src="@{static/js/rangeslider.js}"></script><!-- RANGESLIDER -->
+<script th:src="@{static/js/owl.carousel.js}"></script><!-- OWL SLIDER -->
+<script th:src="@{static/js/custom.js}"></script><!-- CUSTOM FUCTIONS -->
+<script th:src="@{static/js/dz.carousel.js}"></script><!-- SORTCODE FUCTIONS -->
+<script th:src="@{static/js/dz.ajax.js}"></script><!-- CONTACT JS -->
+<script th:src="@{static/js/jquery.star-rating-svg.js}"></script><!-- STAR RATING SVG -->
+<script th:src='@{static/js/moment.min.js}'></script><!-- SORTCODE FUCTIONS  -->
+<script th:src='@{static/js/calendar.js}'></script><!-- SORTCODE FUCTIONS  -->
+<script th:src="@{static/js/particles.js}"></script>
+<script th:src="@{static/js/particles.app.js}"></script>
+ Tencent MAP
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77"></script>
+<script>
+    $(function () {
+        $(".headerPage").load("header");
+        $(".footerPage").load("footer");
+    });
+
+    function search() {
+        sessionStorage.setItem("city",$("#city").val());
+        sessionStorage.setItem("district",$("#district").val());
+        sessionStorage.setItem("text",$("#text").val());
+        return true;
+    }
+
+</script>
+</body>
+</html>

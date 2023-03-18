@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-L-admin1.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="shortcut icon" th:href="@{/static/favicon.ico}" type="image/x-icon"/>
+    <link th:href="@{/static/css/font.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/static/css/xadmin.css}">
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/static/js/xadmin.js}"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="layui-anim layui-anim-up">
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a>订单管理</a>
+        <a>订单列表</a>
+        <a>
+          <cite>订单信息详情</cite></a>
+      </span>
+    <a class="layui-btn layui-btn-primary layui-btn-small" id="flushBtn"
+       style="line-height:1.6em;margin-top:3px;float:right" title="刷新">
+        <i class="layui-icon" style="line-height:38px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <div class="layui-row">
+        <div class="layui-form layui-col-md12 x-so">
+            <input type="text" name="orderId" id="orderId" placeholder="请输入订单号" autocomplete="off" class="layui-input">
+            <div class="layui-input-inline" style="margin-top: -4px">
+                <select name="contrller" id="paymentStatus">
+                    <option value="1">已支付</option>
+                    <option value="0">未支付</option>
+                </select>
+            </div>
+            <input type="text" name="homeId" id="homeId" placeholder="请输入房源ID" autocomplete="off" class="layui-input">
+            <input class="layui-input" placeholder="开始日" name="start" id="start">
+            <input class="layui-input" placeholder="截止日" name="end" id="end">
+            <button class="layui-btn" id="search" lay-filter="search" data-type="reload"><i
+                    class="layui-icon">&#xe615;</i>
+            </button>
+        </div>
+    </div>
+
+    <xblock>
+        <span class="x-right" style="line-height:40px">条</span><span class="x-right gaibian"
+                                                                     style="line-height:40px">0</span><span
+            class="x-right" style="line-height:40px">共有内容:</span>
+    </xblock>
+    <table class="layui-table" id='demoBox' lay-filter="test"></table>
+</div>
+<script>
+    var param = {
+        "orderId": $('orderId').val(),       //订单ID
+        "homeId": $('homeId').val(),  //支付方式
+        "paymentStatus": $('#paymentStatus').val(),  //支付状态
+        "StartTime": $('start').val(),
+        "EndTime": $('end').val()
+    };
+    layui.use(["table", "layer"], function () {
+        var table = layui.table;
+        var layer = layui.layer;
+        table.render({
+            elem: "#demoBox",
+            url: "http://localhost:8081/order/selectPage",
+            cellMinWidth: '200',
+            cols: [
+                [
+                    {
+                        field: 'id',
+                        title: 'ID',
+                        align: 'center',
+                        Width: "80"
+                    },
+                    {
+                        field: 'userId',
+                        title: '用户ID',
+                        align: 'center',
+                        Width: '200px'
+                    },
+                    {
+                        field: 'homeId',
+                        title: '房源ID',
+                        align: 'center',
+                        Width: '200px'
+                    },
+                    {
+                        field: 'homeName',
+                        title: '房源名称',
+                        align: 'center',
+                        Width: '200px'
+                    },
+                    {
+                        field: 'homePrice',
+                        title: '房源价格(元/天)',
+                        align: 'center',
+                        Width: '120px'
+                    },
+                    {
+                        field: 'inTime',
+                        title: '入住时间',
+                        align: 'center',
+                        Width: '180'
+                    },
+                    {
+                        field: 'inDays',
+                        title: '入住天数',
+                        align: 'center',
+                        Width: '50'
+                    },
+                    {
+                        field: 'inSum',
+                        title: '入住人数',
+                        align: 'center',
+                        Width: '50'
+                    },
+                    {
+                        field: 'transactionAmount',
+                        title: '交易金额',
+                        align: 'center',
+                        Width: '100'
+                    },
+                    {
+                        field: 'paymentStatus',
+                        title: '支付状态',
+                        align: 'center',
+                        Width: '80',
+                        templet: function (d) {
+                            if (d.paymentStatus === '1') {
+                                return '已支付'
+                            }
+                            return '未支付'
+                        }
+                    },
+                    {
+                        field: 'paymentMethod',
+                        title: '支付方法',
+                        align: 'center',
+                        Width: '80'
+                    },
+                    {
+                        field: 'createTime',
+                        type: 'datetime',
+                        title: '订单创建时间',
+                        align: "center",
+                        Width: '180',
+                    },
+                    {
+                        field: 'payTime',
+                        type: 'datetime',
+                        title: '支付时间',
+                        align: "center",
+                        Width: '180',
+                    },
+                    {
+
+                        field: 'isDel',
+                        title: '是否删除',
+                        align: "center"
+                    },
+                    {
+                        field: 'updateTime',
+                        title: '订单更新时间',
+                        align: "center"
+                    },
+                    {
+                        field: 'options',
+                        title: '操作',
+                        align: 'center',
+                        Width: '150',
+                        templet: function (d) {
+                            return '<div>' +
+                                '              <a title="删除" onclick="member_del(this,' + d.id + ')" href="javascript:;">\n' +
+                                '                <i class="layui-icon">&#xe640;</i>\n' +
+                                '              </a>' +
+                                '</div>'
+                        }
+                    }
+                ],
+            ],
+            done: function (res, curr, count) {
+                $('.layui-table').find("[data-field='isDel']").css("display", "none");
+                $('.layui-table').find("[data-field='updateTime']").css("display", "none");
+                $('.layui-table').find("[data-field='paymentStatus']").addClass("td-status");
+                $('.layui-table').find("[data-field='options']").addClass("td-manage");
+                $('.gaibian').html(count);
+            },
+            page: 1,
+            limit: 10,
+            text: {
+                none: '无数据'
+            },
+            method: 'get',
+            where: param,
+            error: function (res, msg) {
+                console.log(res + msg)
+                layer.msg("账号异常，请重新登录账号", {
+                    time: 1500,
+                    end: function () {
+                        $(window).attr('location', 'http://localhost:8081/logout');
+                    }
+                });
+            },
+            parseData: function (res) {
+                console.log("adas" + res.code)
+                layer.msg(res)
+                // if (res.code === null){
+                //     layer.msg("账号异常，请重新登录账号", {
+                //         time: 1500,
+                //         end: function () {
+                //             $(window).attr('location', 'http://localhost:8081/logout');
+                //         }
+                //     });
+                // }
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count,
+                    "data": res.data//解析数据列表
+                }
+            },
+            id: 'reload',
+        });
+
+        //表刷新方法
+        var reloadTable = function () {
+            table.reload("reload", { //此处是上文提到的 初始化标识id
+                page: {
+                    curr: 1,
+                    limit: 10
+                },
+                where: {
+                    orderId: '',
+                    homeId: '',
+                    start: '',
+                    paymentStatus:$('#paymentStatus').val(),
+                    end: '',
+                },
+                done: function (res, curr, count) {
+                    $('.layui-table').find("[data-field='isDel']").css("display", "none");
+                    $('.layui-table').find("[data-field='updateTime']").css("display", "none");
+                    $('.layui-table').find("[data-field='paymentStatus']").addClass("td-status");
+                    $('.layui-table').find("[data-field='options']").addClass("td-manage");
+                    $('.gaibian').html(count);
+                },
+            });
+        };
+        $('#flushBtn').on('click', function () {
+            $('#orderId').val('');
+            $('#homeId').val('');
+            $('#start').val('');
+            $('#end').val('');
+            reloadTable();
+        });
+
+        //搜索方法
+        var active = {
+            reload: function () {
+                var index = layer.msg('查询中，请稍后...', {icon: 16, time: false, shade: 0});
+                setTimeout(function () {
+                    table.reload('reload', {
+                        page: {
+                            curr: 1
+                        }, where: {
+                            orderId: $('#orderId').val(),
+                            homeId: $('#homeId').val(),
+                            paymentStatus: $('#paymentStatus').val(),
+                            start: $('#start').val(),
+                            end: $('#end').val(),
+                        }
+                    })
+                    layer.close(index);
+                }, 800)
+            }
+        };
+        $('#search').on('click', function () {
+            var s = $('#start').val() === "" ? 0 : 1;
+            var e = $('#end').val() === "" ? 0 : 1;
+            var text = ''
+            if (s !== e) {
+                if (s === 0) {
+                    text = "开始日期";
+                } else {
+                    text = "结束日期";
+                }
+                layer.msg("您的输入条件有误，请您补全" + text);
+            } else {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            }
+        });
+
+    })
+
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        var startDate = laydate.render({
+            elem: '#start',//指定元素
+            type: 'date',//设置日期的类型
+            theme: '#2c78da',
+            done: function (value, date) {
+                if (value !== "") {
+                    date.month = date.month - 1;
+                    endDate.config.min = date;
+                } else {
+                    endDate.config.min = startDate.config.min;
+                }
+            },
+        });
+        //执行一个laydate实例
+        var endDate = laydate.render({
+            elem: '#end', //指定元素
+            type: 'date',//设置日期的类型
+            theme: '#2c78da',
+            done: function (value, date) {
+                if (value !== "") {
+                    date.month = date.month - 1;
+                    startDate.config.max = date;
+                } else {
+                    startDate.config.max = endDate.config.max;
+                }
+            }
+        });
+    });
+
+    function member_del(obj, id) {
+        var a = ['-999', id]
+        layer.confirm('确认要删除吗？', function (index) {
+            //发异步删除数据
+            $.ajax({
+                url: "http://localhost:8081/order/del",
+                type: "POST",
+                data: JSON.stringify(a),
+                contentType: 'application/json',
+                success: function (data) {
+                    $(obj).parents("tr").remove();
+                    if ($('.gaibian').html() !== '0') {
+                        $('.gaibian').html(parseInt($('.gaibian').html()) - 1);
+                    }
+                    if (data.count !== 0) {
+                        layer.msg('删除成功!', {icon: 1, time: 1500});
+                    } else {
+                        layer.msg('删除失败,该用户已被删除', {icon: 2, time: 1500});
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    layer.msg("账号异常，请重新登录账号", {
+                        time: 1500,
+                        end: function () {
+                            $(window).attr('location', 'http://localhost:8081/logout');
+                        }
+                    });
+                }
+            });
+        });
+    }
+</script>
+</body>
+
+</html>

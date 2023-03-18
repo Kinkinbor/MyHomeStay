@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="">
+    <meta name="description" content="BizMap Directory & Listings HTML templates">
+    <meta name="format-detection" content="telephone=no"><!-- FAVICONS ICON -->
+    <title>BizMap Directory & Listings HTML templates</title><!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/plugins.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/templete.css}">
+    <link class="skin" rel="stylesheet" type="text/css" th:href="@{static/css/skin-1.css}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{static/picture/favicon.png}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/star-rating-svg.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/jquery-te-1.4.0.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/imageuploadify.min.css}">
+    <link rel="stylesheet" th:href="@{static/css/jquery.tag-editor.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/calendar.css}">
+</head>
+<body id="bg">
+<div id="loading-area"></div>
+<div class="page-wraper">
+    <!-- header -->
+    <div class="headerPage"></div>
+    <!-- Content -->
+    <div class="page-content bg-white"><!-- inner page banner -->
+        <div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-black-middle"
+             style="background-image:url(static/picture/bnr2.jpg);">
+            <div class="container">
+                <div class="dlab-bnr-inr-entry"><h1 class="text-white">Add Listing</h1>
+                    <p>Find awesome places,bars,restaurants & activities.</p><!-- Breadcrumb row -->
+                    <div class="breadcrumb-row">
+                        <ul class="list-inline">
+                            <li><a href="index.html">Home</a></li>
+                            <li>Add Listing</li>
+                        </ul>
+                    </div><!-- Breadcrumb row END --></div>
+            </div>
+        </div><!-- inner page banner END --><!-- contact area -->
+        <div class="section-full content-inner">
+            <div class="container">
+                <div class="row"><!-- Left part start -->
+                    <div class="col-lg-12">
+                        <div class="highlight-bx"><h4 class="title">Returning User? Please <a href="#" class="btn-link">Sign
+                            In </a>and if you are a <strong>New User,Continue Below</strong>and register along with this
+                            submission.</h4></div>
+                    </div>
+                    <div class="col-xl-8 col-lg-7 col-md-12 m-b30">
+                        <form class="add-listing-form">
+                            <div class="content-box">
+                                <div class="content-header"><h3 class="title">PRIMARY LISTING DETAILS <i
+                                        data-toggle="tooltip" data-placement="top" title="Primary Listing Details"
+                                        class="tooltip-bx fa fa-question-circle"></i></h3></div>
+                                <div class="content-body">
+                                    <div class="form-group"><label>Directory Name</label><input type="text"
+                                                                                                class="form-control m-b10"
+                                                                                                placeholder="Staple & Fancy Hotel">
+                                        <div data-toggle="collapse" data-target="#tagline" role="button"
+                                             aria-expanded="false" aria-controls="tagline"><input id="check1"
+                                                                                                  type="checkbox"><label
+                                                for="check1">Does Your Business have a tagline?</label></div>
+                                    </div>
+                                    <div class="form-group collapse" id="tagline"><label>Tagline</label><input
+                                            type="text" class="form-control"
+                                            placeholder="Tagline Example: Best Express Mexican Grill"></div>
+                                    <div class="form-group"><label>Directory URL</label><input type="text"
+                                                                                               class="form-control"
+                                                                                               placeholder="http://">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-box">
+                                <div class="content-header"><h3 class="title">CATEGORY & SERVICES <i
+                                        data-toggle="tooltip" data-placement="top" title="Category & Services"
+                                        class="tooltip-bx fa fa-question-circle"></i></h3></div>
+                                <div class="content-body">
+                                    <div class="form-group"><label>Industry Or Niche </label><select>
+                                        <option>Arts &amp;Entertainment</option>
+                                        <option>Sport &amp;Fitness</option>
+                                        <option>Local Businesses</option>
+                                        <option>Tours &amp;Travel</option>
+                                        <option>Hospitality</option>
+                                    </select></div>
+                                </div>
+                            </div>
+                            <div class="content-box">
+                                <div class="content-header"><h3 class="title">SOCIAL MEDIA <i data-toggle="tooltip"
+                                                                                              data-placement="top"
+                                                                                              title="Social Media"
+                                                                                              class="tooltip-bx fa fa-question-circle"></i>
+                                </h3></div>
+                                <div class="content-body">
+                                    <div class="add-social-link social-btn-container">
+                                        <div class="input-group"><select id="mySelect">
+                                            <option>Instagram</option>
+                                            <option>LinkedIn</option>
+                                            <option>Facebook</option>
+                                        </select><input type="text" class="form-control" placeholder="http://">
+                                            <div class="input-group-prepend">
+                                                <button class="site-button btn-block add-social-btn" type="button"><i
+                                                        class="fa fa-plus"></i>Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-box">
+                                <div class="content-header"><h3 class="title">MORE INFO <i data-toggle="tooltip"
+                                                                                           data-placement="top"
+                                                                                           title="More Info"
+                                                                                           class="tooltip-bx fa fa-question-circle"></i>
+                                </h3></div>
+                                <div class="content-body editor">
+                                    <div class="form-group "><label>Description </label><input name="input" type="text"
+                                                                                               value="<b>My contents are from <u><span style=&quot;color:rgb(0, 148, 133);&quot;>INPUT</span></u></b>"
+                                                                                               class="jqte-test"></div>
+                                    <div class="form-group"><label>Tags Or Keywords(Comma Separated)</label><textarea
+                                            class="form-control" id="input-tags">example tags,sortable,autocomplete,edit in place,</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-box" >
+                                <div class="content-header"><h3 class="title">MEDIA <i data-toggle="tooltip"
+                                                                                       data-placement="top"
+                                                                                       title="Social Media"
+                                                                                       class="tooltip-bx fa fa-question-circle"></i>
+                                </h3></div>
+                                <div class="content-body">
+                                    <!--                                    <div class="form-group"><label>Your Business Video(Optional)</label><input-->
+                                    <!--                                            type="text" class="form-control" placeholder="https://www.youtube.com/">-->
+                                    <!--                                    </div>-->
+                                    <div class="form-group"><label>Upload Business Logo</label>
+                                        <!--                                        <input type="file" accept=".xlsx,.xls,image">-->
+
+                                        <!--                                        </input type="file" accept=".xlsx,.xls,image">-->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".headerPage").load("header");
+        $(".footerPage").load("footer");
+    });
+</script>
+<script th:src="@{static/js/popper.min.js}"></script><!-- BOOTSTRAP.MIN JS -->
+<script th:src="@{static/js/bootstrap.min.js}"></script><!-- BOOTSTRAP.MIN JS -->
+<script th:src="@{static/js/bootstrap-select.min.js}"></script><!-- FORM JS -->
+<script th:src="@{static/js/jquery.bootstrap-touchspin.js}"></script><!-- FORM JS -->
+<script th:src="@{static/js/magnific-popup.js}"></script><!-- MAGNIFIC POPUP JS -->
+<script th:src="@{static/js/waypoints-min.js}"></script><!-- WAYPOINTS JS -->
+<script th:src="@{static/js/counterup.min.js}"></script><!-- COUNTERUP JS -->
+<script th:src="@{static/js/imagesloaded.js}"></script><!-- IMAGESLOADED -->
+<script th:src="@{static/js/masonry-3.1.4.js}"></script><!-- MASONRY -->
+<script th:src="@{static/js/masonry.filter.js}"></script><!-- MASONRY -->
+<script th:src="@{static/js/rangeslider.js}"></script><!-- RANGESLIDER -->
+<script th:src="@{static/js/owl.carousel.js}"></script><!-- OWL SLIDER -->
+<script th:src="@{static/js/custom.js}"></script><!-- CUSTOM FUCTIONS -->
+<script th:src="@{static/js/dz.carousel.js}"></script><!-- SORTCODE FUCTIONS -->
+<script th:src="@{static/js/dz.ajax.js}"></script><!-- CONTACT JS -->
+<!-- Tencent MAP -->
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77"></script>
+<script th:src="@{static/js/jquery.star-rating-svg.js}"></script><!-- STAR RATING SVG -->
+<script th:src='@{static/js/moment.min.js}'></script><!-- SORTCODE FUCTIONS  -->
+<script th:src='@{static/js/calendar.js}'></script><!-- SORTCODE FUCTIONS  -->
+<script th:src="@{static/js/particles.js}"></script>
+<script th:src="@{static/js/particles.app.js}"></script>
+
+</body>
+</html>
